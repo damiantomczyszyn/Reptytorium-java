@@ -8,10 +8,10 @@ public class Main {
 
         Client client = new Client();
 
-        String echo = client.sendEcho("maciek");
-        System.out.println("Odpowiedz servera UDP: " + echo);
+        client.send("maciek","biegam"," bardzo ", "szybko");
 
-        client.sendEcho("end");
+
+
         client.close();
 
         }

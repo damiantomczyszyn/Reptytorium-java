@@ -12,16 +12,41 @@ public class Client {
         address = InetAddress.getByName("localhost");
     }
 
-    public String sendEcho(String msg) throws IOException {
+    public void send(String msg,String conc1,String conc2, String conc3) throws IOException {
         buf = msg.getBytes();
-        DatagramPacket packet
-                = new DatagramPacket(buf, buf.length, address, 4445);
-        socket.send(packet);
-        packet = new DatagramPacket(buf, buf.length);
 
+        DatagramPacket packet  = new DatagramPacket(buf, buf.length, address, 4445);
+
+        socket.send(packet);
+
+        buf = new byte[256];
+        packet = new DatagramPacket(buf, buf.length);
         socket.receive(packet);
         String received = new String(packet.getData(), 0, packet.getLength());
-        return received;
+        System.out.println("Odebrano: "+ received);
+
+        buf = conc1.getBytes();//1 string
+        new DatagramPacket(buf, buf.length, address, 4445);
+        socket.send(packet);
+
+        buf = conc2.getBytes();//2string
+        packet  = new DatagramPacket(buf, buf.length, address, 4445);
+        socket.send(packet);
+
+
+
+        buf = conc3.getBytes();//3 string
+        packet  = new DatagramPacket(buf, buf.length, address, 4445);
+        socket.send(packet);
+
+
+
+
+        socket.receive(packet);
+        received = new String(packet.getData(), 0, packet.getLength());
+        System.out.println("Odebrano: "+ received);
+
+
     }
 
     public void close() {
