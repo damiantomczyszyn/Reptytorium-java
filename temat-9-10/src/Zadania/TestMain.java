@@ -4,7 +4,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class TestMain {
-    public static void main(String[] args) throws IOException, ClassNotFoundException {
+    public static void main(String[] args) throws IOException
+    {
         Kopiuj.kopiujFile("test1.txt", "test2.txt");
         Kopiuj.kopiujBuforem("test1.txt","test2.txt");
         System.out.println("\nzad 2:");
@@ -21,12 +22,10 @@ public class TestMain {
 
         System.out.println("\nzadanie6:");
         var listaOsob = new ArrayList<Osoba>(10);//dodajmy wstępnie 10 miejsc
-        Osoba.wczytajOsoby("dataOsoby", listaOsob);// przerobione na serializacje
-        while (true){
-        Osoba.wczytajOsoby2("osoby.txt", listaOsob);//
-             }
+        Osoba.wczytajOsoby("osobyStream.txt", listaOsob);//
+        Osoba.wczytajOsoby2("osobyStream.txt", listaOsob);//
 
 
-      // System.exit(0);
+       System.exit(0);
     }
 }

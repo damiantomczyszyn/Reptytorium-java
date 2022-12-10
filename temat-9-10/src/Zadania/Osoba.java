@@ -5,7 +5,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Osoba implements Serializable{
+public class Osoba {
     public String getImie() {
         return imie;
     }
@@ -18,6 +18,7 @@ public class Osoba implements Serializable{
     public String toString() {
         return getImie()+" : "+getNazwisko();
     }
+    static StringBuffer buffer = new StringBuffer();
 
 
     public Osoba(String imie, String nazwisko) {
@@ -39,12 +40,22 @@ public class Osoba implements Serializable{
  */
 
 
-    static public int wczytajOsoby(String path, ArrayList<Osoba> listaOsob) throws IOException, ClassNotFoundException {
+    static public int wczytajOsoby(String path, ArrayList<Osoba> listaOsob) throws IOException {
 
-        FileInputStream fileInputStream = new FileInputStream(path);
-        ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-        listaOsob = (ArrayList) objectInputStream.readObject();
-        objectInputStream.close();
+
+        var input= new FileInputStream(path);
+        var dinput= new DataInputStream(input);
+
+        while(dinput.available()>0) {
+
+            // reads characters encoded with modified UTF-8
+            String k = dinput.readUTF();
+            System.out.print(k+" ");
+            Osoba temp = new Osoba(k);//stworzenie osoby z lini pliku
+            listaOsob.add(temp);//dodanie osoby do listy
+
+        }
+
         System.out.println("Wczytano wszystkie osoby z pliku do listy");
 
 
@@ -53,7 +64,6 @@ public class Osoba implements Serializable{
         }
         return 0;
     }
-
 
 
 
@@ -89,19 +99,18 @@ public class Osoba implements Serializable{
                 else System.out.println("Niepoprawny indeks");
                 break;
             }
-            case 4:{
+            case 4: {
                 System.out.println("Podano 4");
                 System.out.println("Podaj nazwe pliku do ktorego chcesz zapisac tablice");
                 sc.nextLine();
-                String str=sc.nextLine();
+                String str = sc.nextLine();
+                var output= new FileOutputStream(str);
+                var doutput= new DataOutputStream(output);
+                for (Osoba x :listaOsob){
+                    doutput.writeUTF(x.toString()+"\n");
+                }
 
-                FileOutputStream fileOutputStream = new FileOutputStream(str);
-                ObjectOutputStream objectOutputStream  = new ObjectOutputStream(fileOutputStream);
-                objectOutputStream.writeObject(listaOsob);
-                objectOutputStream.flush();//zapsianei wszystkich bajtow ze strumienia
-                objectOutputStream.close();
-
-                break;
+                doutput.flush();
             }
             default:{
                 System.out.println("niewłaściwy wybór");
