@@ -5,6 +5,9 @@ import java.util.LinkedHashSet;
 //https://www.geeksforgeeks.org/how-to-sort-arraylist-using-comparator/
 
 public class Main {
+    static void test(){
+
+    }
     public static void main(String[] args) {
         HashSet<Student> students= new HashSet<Student>();
         students.add(new Student("Karol","Warol",4,4,4));
@@ -69,6 +72,13 @@ It contains unique elements.
         {
             System.out.println(x.nazwisko+" "+x.imie);
         }
+
+        //System.out.println("Zadanie 3: ");
+        ZapisOsob zapis = new ZapisOsob(students2);
+        zapis.serialize();
+        System.out.println("Zadanie 4: ");
+        Zbiory zbiory = new Zbiory();
+        zbiory.Menu();
 
     }
 
