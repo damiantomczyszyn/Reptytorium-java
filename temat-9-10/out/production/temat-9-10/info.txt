@@ -1,0 +1,3 @@
+Zadanie z zapisem listy osob
+sortowanie napisz sam z interfejsu comparable
+albo comparator

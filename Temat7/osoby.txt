@@ -1,0 +1,6 @@
+kuba : kubanczyk
+karol : kojtyla
+warol : kojtyla
+jan : pawel
+zgredek : poterowiec
+legolas : lucznik
