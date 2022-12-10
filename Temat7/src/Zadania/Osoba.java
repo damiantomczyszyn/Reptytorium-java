@@ -18,6 +18,7 @@ public class Osoba {
     public String toString() {
         return getImie()+" : "+getNazwisko();
     }
+    static StringBuffer buffer = new StringBuffer();
 
 
     public Osoba(String imie, String nazwisko) {
@@ -39,24 +40,22 @@ public class Osoba {
  */
 
 
-    static public int wczytajOsoby(String path, ArrayList<Osoba> listaOsob) throws FileNotFoundException {
+    static public int wczytajOsoby(String path, ArrayList<Osoba> listaOsob) throws IOException {
 
-        File file = new File(path);
-        System.out.println(file.getName());//temp
-        BufferedReader reader;
-        try {
-            reader = new BufferedReader(new FileReader(path));
-            String line = reader.readLine();
-            while (line != null) {
-                System.out.println(line);
-                Osoba temp = new Osoba(line);//stworzenie osoby z lini pliku
-                listaOsob.add(temp);//dodanie osoby do listy
-                line = reader.readLine();
-            }
-            reader.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+
+        var input= new FileInputStream(path);
+        var dinput= new DataInputStream(input);
+
+        while(dinput.available()>0) {
+
+            // reads characters encoded with modified UTF-8
+            String k = dinput.readUTF();
+            System.out.print(k+" ");
+            Osoba temp = new Osoba(k);//stworzenie osoby z lini pliku
+            listaOsob.add(temp);//dodanie osoby do listy
+
         }
+
         System.out.println("Wczytano wszystkie osoby z pliku do listy");
 
 
@@ -68,8 +67,7 @@ public class Osoba {
 
 
 
-
-    static public int wczytajOsoby2(String path, ArrayList<Osoba> listaOsob) throws FileNotFoundException {
+    static public int wczytajOsoby2(String path, ArrayList<Osoba> listaOsob) throws IOException {
         Scanner sc = new Scanner(System.in);
         System.out.println("podaj 1 jesli chcesz dodac osobe");
         System.out.println("podaj 2 jesli chcesz wyczyscic tablice osob");
@@ -101,19 +99,18 @@ public class Osoba {
                 else System.out.println("Niepoprawny indeks");
                 break;
             }
-            case 4:{
+            case 4: {
                 System.out.println("Podano 4");
                 System.out.println("Podaj nazwe pliku do ktorego chcesz zapisac tablice");
                 sc.nextLine();
-                String str=sc.nextLine();
-
-                PrintWriter out = new PrintWriter(str);
+                String str = sc.nextLine();
+                var output= new FileOutputStream(str);
+                var doutput= new DataOutputStream(output);
                 for (Osoba x :listaOsob){
-                    System.out.println(x.toString());
-                    out.println(x.toString());
+                    doutput.writeUTF(x.toString()+"\n");
                 }
-                out.close();
-                break;
+
+                doutput.flush();
             }
             default:{
                 System.out.println("niewłaściwy wybór");

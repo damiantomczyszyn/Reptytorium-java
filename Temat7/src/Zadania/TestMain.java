@@ -22,9 +22,9 @@ public class TestMain {
 
         System.out.println("\nzadanie6:");
         var listaOsob = new ArrayList<Osoba>(10);//dodajmy wstępnie 10 miejsc
-        Osoba.wczytajOsoby("osoby.txt", listaOsob);//
-        Osoba.wczytajOsoby2("osoby.txt", listaOsob);//
-        //Osoba.wczytajOsoby("osoby.txt", listaOsob);
+        Osoba.wczytajOsoby("osobyStream.txt", listaOsob);//
+        Osoba.wczytajOsoby2("osobyStream.txt", listaOsob);//
+
 
        System.exit(0);
     }
