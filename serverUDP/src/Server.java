@@ -58,24 +58,19 @@ public class Server extends Thread {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        //buf = String.getBytes(); na bajty do wysłania
-        data="";
-        System.out.println("w petli");
-
-
+        data ="";
         for (int i=0;i<3;i++)
         {   buf = new byte[256];
             Arrays.fill(buf, (byte)0);
             packet = new DatagramPacket(buf, buf.length);
             try {
                 socket.receive(packet);// czekaj na dane
-                                                    //buf = packet.getData()
+                //buf = packet.getData()
             } catch (IOException e) {
                 e.printStackTrace();
             }
             System.out.println(new String(packet.getData(),0,packet.getLength()));
             data+=new String(packet.getData(),0,packet.getLength());
-
 
         }//odebrano dane i skonkatenowano
 
@@ -84,7 +79,7 @@ public class Server extends Thread {
         packet = new DatagramPacket(buf, buf.length, address, port); // przygotuj nowy pakiet
         try {
             socket.send(packet);// skonkatenowana wiadomosc
-            //System.out.println(data);
+            System.out.println(data);
         } catch (IOException e) {
             e.printStackTrace();
         }//wysłano dane

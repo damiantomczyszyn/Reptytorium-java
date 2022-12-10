@@ -10,9 +10,9 @@ public class Main {
 
         client.send("maciek","biegam"," bardzo ", "szybko");
 
-
-
         client.close();
+
+        // należy uruchomić main servera a potem Main->main
 
         }
 
